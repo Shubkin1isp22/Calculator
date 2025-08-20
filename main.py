@@ -4,6 +4,7 @@ class Window(ctk.CTk):
         super().__init__()
         self.geometry("400x300+500+100")
         self.title("Калькулятор")
+        #self._set_appearance_mode("light")
         
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(0, weight=1)
@@ -171,6 +172,6 @@ class Calculate:
     
 
 
-
+ctk.set_appearance_mode("light")
 app = Window()
 app.mainloop()
