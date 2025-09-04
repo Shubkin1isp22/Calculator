@@ -116,7 +116,7 @@ class Calculate:
                 "+":"+",
                 "-":"-"
             }
-            if i.isdigit():
+            if i.isdigit() or i == '.':
                 num += i
             else:
                 if num:
@@ -127,7 +127,13 @@ class Calculate:
             lst.append(num)
         self.to_OPZ(lst)
 
-
+    def is_number(self, num):
+        try:
+            float(num)
+            return True
+        except ValueError:
+            return False
+    
     def to_OPZ(self, lst):
         win = {
             "+":1,
@@ -139,7 +145,7 @@ class Calculate:
         operators = []
 
         for s in lst:
-            if s.isdigit():
+            if self.is_number(s):
                 output.append(s)
             else:
                 while operators and win[operators[-1]] >= win[s]:
@@ -156,9 +162,9 @@ class Calculate:
     def calcula(self, opz):
         stak = []
         for num in opz:
-            if num.isdigit():
-                stak.append(int(num))
-            else:
+            try:
+                stak.append(float(num))
+            except ValueError:
                 a = stak.pop()
                 b = stak.pop()
                 try:
@@ -166,7 +172,7 @@ class Calculate:
                 except ZeroDivisionError:
                     self.entry.set("Нельзя делить на 0")
                     return
-                stak.append(int(c))
+                stak.append(c)
     
         self.entry.set(stak[0])
     
