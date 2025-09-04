@@ -166,7 +166,7 @@ class Calculate:
                 except ZeroDivisionError:
                     self.entry.set("Нельзя делить на 0")
                     return
-                stak.append(c)
+                stak.append(int(c))
     
         self.entry.set(stak[0])
     
